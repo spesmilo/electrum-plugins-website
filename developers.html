@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plugin Development Guide — Electrum Plugins</title>
+  <meta name="description" content="Learn how to build plugins for the Electrum Bitcoin wallet. Hooks, manifest format, directory structure, and submission guidelines.">
+  <link rel="canonical" href="https://plugins.electrum.org/developers.html">
+  <meta property="og:title" content="Plugin Development Guide — Electrum Plugins">
+  <meta property="og:description" content="Learn how to build plugins for the Electrum Bitcoin wallet. Hooks, manifest format, directory structure, and submission guidelines.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://plugins.electrum.org/developers.html">
+  <link rel="icon" href="assets/icons/electrum_darkblue.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        <img src="assets/icons/electrum_darkblue.svg" alt="Electrum logo" width="32" height="32">
+        Electrum Plugins
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="plugins.html">Plugins</a></li>
+          <li><a href="developers.html" class="active">Developers</a></li>
+          <li><a href="https://electrum.org" class="nav-external">electrum.org</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="section">
+      <div class="container">
+        <h1 class="section-title">Plugin Development Guide</h1>
+        <p class="section-subtitle">Everything you need to build, package, and distribute Electrum plugins.</p>
+
+        <div class="dev-layout">
+
+          <!-- Sidebar TOC -->
+          <aside class="dev-sidebar">
+            <h2>Contents</h2>
+            <ul>
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#hooks">Plugin Hooks</a></li>
+              <li><a href="#structure">Directory Structure</a></li>
+              <li><a href="#manifest">manifest.json</a></li>
+              <li><a href="#module">Plugin Module</a></li>
+              <li><a href="#commands">Plugin Commands</a></li>
+              <li><a href="#packaging">Creating .zip Files</a></li>
+              <li><a href="#hardware">Hardware Wallet Plugins</a></li>
+              <li><a href="#loading">Loading External Plugins</a></li>
+            </ul>
+          </aside>
+
+          <!-- Content -->
+          <div class="dev-content">
+
+            <!-- Overview -->
+            <section id="overview">
+              <h2>Overview</h2>
+              <p>Electrum plugins extend the wallet with new features without modifying core code. Plugins interact with Electrum through a <strong>hook system</strong> and can provide GUI elements for Qt, QML, and command-line interfaces.</p>
+              <p>Example plugin repositories for reference:</p>
+              <ul>
+                <li><a href="https://github.com/spesmilo/electrum/tree/master/electrum/plugins/labels">LabelSync</a> &mdash; multi-GUI plugin with Qt, QML, and CLI modules</li>
+                <li><a href="https://github.com/spesmilo/electrum/tree/master/electrum/plugins/revealer">Revealer</a> &mdash; Qt-only plugin with custom dialogs</li>
+                <li><a href="https://github.com/spesmilo/electrum/tree/master/electrum/plugins/nwc">Nostr Wallet Connect</a> &mdash; plugin using Nostr protocol integration</li>
+              </ul>
+            </section>
+
+            <!-- Plugin Hooks -->
+            <section id="hooks">
+              <h2>Plugin Hooks</h2>
+              <p>Plugins interact with Electrum code through <strong>hooks</strong>. The <code>@hook</code> decorator on a plugin method registers it to be called when Electrum triggers that hook.</p>
+
+              <h3>How hooks work</h3>
+              <p>In your plugin class, decorate methods with <code>@hook</code>:</p>
+<pre><code>from electrum.plugin import BasePlugin, hook
+
+class Plugin(BasePlugin):
+
+    @hook
+    def password_dialog(self, pw, grid, pos):
+        """Called when the password dialog is displayed."""
+        # Add custom UI elements to the password dialog
+        ...</code></pre>
+
+              <p>Electrum triggers hooks internally using <code>run_hook()</code>:</p>
+<pre><code># Inside Electrum core code
+run_hook('password_dialog', pw, grid, pos)</code></pre>
+
+              <p>When a hook is triggered, all enabled plugins that have a matching decorated method will be called.</p>
+
+              <h3>Available hooks</h3>
+              <p>Below is a reference of commonly used hooks. The hook name must match the method name exactly.</p>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Hook</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>password_dialog</code></td><td>Customize the password input dialog</td></tr>
+                    <tr><td><code>load_wallet</code></td><td>Called when a wallet is loaded in the GUI</td></tr>
+                    <tr><td><code>close_wallet</code></td><td>Called when a wallet is being closed</td></tr>
+                    <tr><td><code>daemon_wallet_loaded</code></td><td>Called when the daemon loads a wallet</td></tr>
+                    <tr><td><code>init_menubar</code></td><td>Initialize the application menu bar</td></tr>
+                    <tr><td><code>init_qml</code></td><td>Initialize the QML application</td></tr>
+                    <tr><td><code>init_wallet_wizard</code></td><td>Add pages to the wallet creation wizard</td></tr>
+                    <tr><td><code>create_send_tab</code></td><td>Add elements to the send tab</td></tr>
+                    <tr><td><code>create_status_bar</code></td><td>Add elements to the status bar</td></tr>
+                    <tr><td><code>abort_send</code></td><td>Return True to abort sending a transaction</td></tr>
+                    <tr><td><code>make_unsigned_transaction</code></td><td>Modify an unsigned transaction before signing</td></tr>
+                    <tr><td><code>set_label</code></td><td>Called when a wallet label is set</td></tr>
+                    <tr><td><code>do_clear</code></td><td>Called when the send tab is cleared</td></tr>
+                    <tr><td><code>on_close_window</code></td><td>Called when a wallet window is closed</td></tr>
+                    <tr><td><code>wallet_info_buttons</code></td><td>Add buttons to the wallet information section</td></tr>
+                    <tr><td><code>qt_utxo_menu</code></td><td>Add items to the UTXO context menu</td></tr>
+                    <tr><td><code>receive_list_menu</code></td><td>Add items to the receive list context menu</td></tr>
+                    <tr><td><code>receive_menu</code></td><td>Add items to the receive context menu</td></tr>
+                    <tr><td><code>transaction_dialog_address_menu</code></td><td>Add items to the transaction dialog address menu</td></tr>
+                    <tr><td><code>create_contact_menu</code></td><td>Add items to the contact context menu</td></tr>
+                    <tr><td><code>export_history_to_file</code></td><td>Custom export of transaction history</td></tr>
+                    <tr><td><code>close_settings_dialog</code></td><td>Called when the settings dialog is closed</td></tr>
+                    <tr><td><code>show_xpub_button</code></td><td>Add buttons to the xpub display dialog</td></tr>
+                    <tr><td><code>init_keystore</code></td><td>Initialize a custom keystore (hardware wallets)</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p><strong>Note:</strong> This list may be outdated. For a complete and up-to-date list of all available hooks, search the Electrum codebase for <code>run_hook</code>.</p>
+            </section>
+
+            <!-- Directory Structure -->
+            <section id="structure">
+              <h2>Directory Structure</h2>
+              <p>A plugin is a directory containing the following files:</p>
+
+<pre><code>my_plugin/
+├── manifest.json      # Plugin metadata (required)
+├── __init__.py        # Commands and config declarations
+├── qt.py              # Qt GUI module (optional)
+├── qml.py             # QML GUI module (optional)
+├── cmdline.py         # Command-line module (optional)
+├── my_plugin.py       # Shared logic (optional)
+├── icon.png           # Plugin icon (optional)
+└── MyPlugin.qml       # QML UI file (optional)</code></pre>
+
+              <ul>
+                <li><code>manifest.json</code> &mdash; describes the plugin and is pre-loaded to display plugin information in the Electrum client</li>
+                <li><code>__init__.py</code> &mdash; registers commands and configuration variables</li>
+                <li><strong>UI modules</strong> &mdash; contain a <code>Plugin</code> class inheriting from <code>BasePlugin</code> for each supported interface (Qt, QML, CLI)</li>
+              </ul>
+
+              <h3>Example: Labels plugin structure</h3>
+<pre><code>labels/
+├── manifest.json
+├── __init__.py        # Plugin commands (push, pull)
+├── labels.py          # Core sync logic
+├── qt.py              # Qt GUI integration
+├── qml.py             # QML GUI integration
+├── cmdline.py         # CLI integration
+├── Labels.qml         # QML UI component
+└── labelsync.png      # Plugin icon</code></pre>
+            </section>
+
+            <!-- manifest.json -->
+            <section id="manifest">
+              <h2>manifest.json</h2>
+              <p>The manifest file is pre-loaded by Electrum to display plugin information before the plugin code itself is loaded. It must be valid JSON.</p>
+
+              <h3>Example</h3>
+<pre><code>{
+    "name": "my_plugin",
+    "fullname": "My Plugin",
+    "description": "A brief description of what the plugin does.",
+    "available_for": ["qt", "qml", "cmdline"],
+    "author": "Your Name",
+    "license": "MIT",
+    "icon": "my-icon.png",
+    "version": "0.0.1"
+}</code></pre>
+
+              <h3>Field reference</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Field</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><code>name</code></td><td>string</td><td>Yes</td><td>Internal identifier (must match the directory name)</td></tr>
+                    <tr><td><code>fullname</code></td><td>string</td><td>Yes</td><td>Display name shown to users</td></tr>
+                    <tr><td><code>description</code></td><td>string</td><td>Yes</td><td>Brief description of plugin functionality</td></tr>
+                    <tr><td><code>available_for</code></td><td>array</td><td>Yes</td><td>GUI types: <code>"qt"</code>, <code>"qml"</code>, <code>"cmdline"</code></td></tr>
+                    <tr><td><code>author</code></td><td>string</td><td>No</td><td>Plugin author name</td></tr>
+                    <tr><td><code>license</code></td><td>string</td><td>No</td><td>Software license (e.g., MIT)</td></tr>
+                    <tr><td><code>icon</code></td><td>string</td><td>No</td><td>Icon filename (relative to plugin directory)</td></tr>
+                    <tr><td><code>version</code></td><td>string</td><td>No</td><td>Plugin version string</td></tr>
+                    <tr><td><code>requires</code></td><td>array</td><td>No</td><td>External dependencies: <code>[["package", "url"], ...]</code></td></tr>
+                    <tr><td><code>registers_keystore</code></td><td>array</td><td>No</td><td>For hardware wallets: <code>["hardware", "id", "Display Name"]</code></td></tr>
+                    <tr><td><code>registers_wallet_type</code></td><td>array</td><td>No</td><td>For custom wallet types</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h3>Hardware wallet manifest example</h3>
+<pre><code>{
+    "name": "coldcard",
+    "fullname": "Coldcard Wallet",
+    "description": "Provides support for the Coldcard hardware wallet from Coinkite",
+    "requires": [["ckcc-protocol", "github.com/Coldcard/ckcc-protocol"]],
+    "registers_keystore": ["hardware", "coldcard", "Coldcard Wallet"],
+    "icon": "coldcard.png",
+    "available_for": ["qt", "cmdline"]
+}</code></pre>
+            </section>
+
+            <!-- Plugin Module -->
+            <section id="module">
+              <h2>Plugin Module</h2>
+              <p>Each GUI module (e.g., <code>qt.py</code>) must define a <code>Plugin</code> class that inherits from <code>BasePlugin</code>. The class uses <code>@hook</code> decorators to register for events.</p>
+
+              <h3>Minimal example</h3>
+<pre><code>from electrum.plugin import BasePlugin, hook
+
+
+class Plugin(BasePlugin):
+
+    @hook
+    def init_menubar(self):
+        """Add a menu item when the menu bar is initialized."""
+        print("My plugin is loaded!")
+
+    def on_close(self):
+        """Clean up when the plugin is disabled."""
+        print("My plugin is closing.")</code></pre>
+
+              <h3>Full example with GUI elements</h3>
+<pre><code>from electrum.plugin import BasePlugin, hook
+from electrum.gui.qt.util import read_QIcon_from_bytes
+
+from PyQt6.QtWidgets import QPushButton
+
+
+class Plugin(BasePlugin):
+
+    @hook
+    def password_dialog(self, pw, grid, pos):
+        """Add a virtual keyboard button to the password dialog."""
+        vkb_button = QPushButton('')
+        vkb_button.setIcon(
+            read_QIcon_from_bytes(self.read_file("keyboard-icon.svg"))
+        )
+        vkb_button.clicked.connect(
+            lambda: self.toggle_vkb(grid, pw)
+        )
+        grid.addWidget(vkb_button, pos, 2)
+
+    def toggle_vkb(self, grid, pw):
+        """Toggle the virtual keyboard visibility."""
+        ...</code></pre>
+
+              <h3>Key BasePlugin methods</h3>
+              <ul>
+                <li><code>is_enabled()</code> &mdash; check if the plugin is enabled and authorized</li>
+                <li><code>is_available()</code> &mdash; override to add conditions for availability</li>
+                <li><code>can_user_disable()</code> &mdash; return True (default) to allow the user to disable the plugin</li>
+                <li><code>on_close()</code> &mdash; override for custom cleanup when the plugin is disabled</li>
+                <li><code>requires_settings()</code> &mdash; return True if the plugin has a settings UI</li>
+                <li><code>settings_widget(window)</code> &mdash; return a widget for the plugin settings dialog</li>
+                <li><code>read_file(filename)</code> &mdash; read a file from the plugin directory (useful for icons and assets)</li>
+                <li><code>get_storage(wallet)</code> &mdash; get persistent dict storage associated with a wallet</li>
+                <li><code>thread_jobs()</code> &mdash; return a list of ThreadJob objects for background tasks</li>
+              </ul>
+            </section>
+
+            <!-- Plugin Commands -->
+            <section id="commands">
+              <h2>Plugin Commands</h2>
+              <p>Plugins can register custom commands that are accessible from the Electrum CLI and daemon RPC interface.</p>
+              <p>Use the <code>@plugin_command</code> decorator from <code>electrum.commands</code>:</p>
+
+<pre><code>from electrum.commands import plugin_command
+
+@plugin_command('w', 'labels')
+async def push(self, plugin=None, wallet=None):
+    """Push labels to the remote server."""
+    return await plugin.push_thread(wallet)
+
+@plugin_command('w', 'labels')
+async def pull(self, plugin=None, wallet=None):
+    """Pull labels from the remote server."""
+    return await plugin.pull_thread(wallet)</code></pre>
+
+              <p>The first argument to <code>@plugin_command</code> specifies the command category:</p>
+              <ul>
+                <li><code>'w'</code> &mdash; wallet command (requires a loaded wallet)</li>
+                <li><code>'n'</code> &mdash; network command (requires network access)</li>
+                <li><code>'wp'</code> &mdash; wallet command requiring password</li>
+              </ul>
+              <p>The second argument is the plugin name (must match <code>manifest.json</code> name).</p>
+            </section>
+
+            <!-- Creating .zip Files -->
+            <section id="packaging">
+              <h2>Creating .zip Files</h2>
+              <p>External plugins are distributed as <code>.zip</code> files that users import via the Electrum GUI.</p>
+              <p>Use the <code>make_plugin</code> script included in the Electrum source:</p>
+
+<pre><code>./contrib/make_plugin /path/to/my_plugin</code></pre>
+
+              <p>This produces a file named <code>my_plugin-0.0.1.zip</code> (using the version from <code>manifest.json</code>).</p>
+              <p>Users can then import the zip file in Electrum via <strong>Tools &rarr; Plugins &rarr; Add</strong>.</p>
+            </section>
+
+            <!-- Hardware Wallet Plugins -->
+            <section id="hardware">
+              <h2>Hardware Wallet Plugins</h2>
+              <p>Hardware wallet plugins differ from standard plugins in several ways:</p>
+              <ul>
+                <li>They are <strong>not displayed</strong> in the normal plugin list &mdash; they are enabled automatically by the wallet creation wizard</li>
+                <li>They use <code>registers_keystore</code> in <code>manifest.json</code> to register a hardware keystore type</li>
+                <li>They can be distributed as zip files with Python dependencies bundled</li>
+                <li>Non-Python dependencies (like <code>hidapi</code>) are typically bundled in Electrum binaries</li>
+              </ul>
+              <p>Third-party hardware wallet plugins can be imported from the wallet wizard.</p>
+
+              <h3>Keystore registration</h3>
+<pre><code>// In manifest.json
+"registers_keystore": ["hardware", "my_device", "My Device Name"]</code></pre>
+              <p>This tells Electrum to include your device in the hardware wallet selection during wallet creation.</p>
+            </section>
+
+            <!-- Loading External Plugins -->
+            <section id="loading">
+              <h2>Loading External Plugins</h2>
+              <p>There are two ways to load external plugins:</p>
+
+              <h3>1. Import from .zip file</h3>
+              <p>Go to <strong>Tools &rarr; Plugins</strong> and click <strong>Add</strong>. Select a <code>.zip</code> file produced by the <code>make_plugin</code> script.</p>
+
+              <h3>2. Symlink during development</h3>
+              <p>When running Electrum from source, you can symlink your plugin directory into the plugins folder:</p>
+<pre><code>ln -s /path/to/my_plugin electrum/electrum/plugins/my_plugin</code></pre>
+              <p>Electrum will detect and load the plugin on next startup.</p>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="https://electrum.org">electrum.org</a>
+          <a href="https://github.com/spesmilo/electrum">Electrum GitHub</a>
+          <a href="https://github.com/f321x/electrum-plugins-website">Website GitHub</a>
+        </div>
+        <p class="footer-copy">Electrum is MIT licensed open-source software.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

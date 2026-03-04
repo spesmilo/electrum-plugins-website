@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plugin Directory — Electrum Plugins</title>
+  <meta name="description" content="Complete directory of Electrum plugins: utility tools, hardware wallet integrations, and community-built extensions.">
+  <link rel="canonical" href="https://plugins.electrum.org/plugins.html">
+  <meta property="og:title" content="Plugin Directory — Electrum Plugins">
+  <meta property="og:description" content="Complete directory of Electrum plugins: utility tools, hardware wallet integrations, and community-built extensions.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://plugins.electrum.org/plugins.html">
+  <link rel="icon" href="assets/icons/electrum_darkblue.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        <img src="assets/icons/electrum_darkblue.svg" alt="Electrum logo" width="32" height="32">
+        Electrum Plugins
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="plugins.html" class="active">Plugins</a></li>
+          <li><a href="developers.html">Developers</a></li>
+          <li><a href="https://electrum.org" class="nav-external">electrum.org</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1 class="section-title">Plugin Directory</h1>
+        <p class="section-subtitle">All plugins available for the Electrum Bitcoin wallet.</p>
+
+        <!-- Section Navigation -->
+        <nav class="section-nav" aria-label="Plugin categories">
+          <a href="#utility">Utility Plugins</a>
+          <a href="#hardware">Hardware Wallets</a>
+          <a href="#external">External Plugins</a>
+        </nav>
+
+        <!-- ============================================================
+             UTILITY PLUGINS
+             ============================================================ -->
+        <section id="utility">
+          <h2 class="section-title">Utility Plugins</h2>
+          <div class="plugin-grid">
+
+            <!-- Audio MODEM -->
+            <article class="plugin-card">
+              <img src="assets/plugins/speaker.png" alt="Audio MODEM icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Audio MODEM</h3>
+                <p class="plugin-description">Provides support for air-gapped transaction signing using sound waves between devices.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- LabelSync -->
+            <article class="plugin-card">
+              <img src="assets/plugins/labelsync.png" alt="LabelSync icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">LabelSync</h3>
+                <p class="plugin-description">Save and synchronize wallet labels across multiple devices. Labels, transaction IDs, and addresses are encrypted before being sent to the remote server.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-qml">Android</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Nostr Wallet Connect -->
+            <article class="plugin-card">
+              <img src="assets/plugins/nwc.png" alt="Nostr Wallet Connect icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Nostr Wallet Connect</h3>
+                <p class="plugin-description">Remote control of Lightning wallets via Nostr protocol (NIP-47). Enables third-party apps to interact with your Lightning node.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Nostr Cosigner -->
+            <article class="plugin-card">
+              <img src="assets/plugins/nostr_multisig.png" alt="Nostr Cosigner icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Nostr Cosigner</h3>
+                <p class="plugin-description">Multi-signature transaction coordination using Nostr relays. Allows cosigners to exchange partially signed transactions over the Nostr network.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-qml">Android</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Revealer -->
+            <article class="plugin-card">
+              <img src="assets/plugins/revealer.png" alt="Revealer icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Revealer</h3>
+                <p class="plugin-description">Create visually encrypted backups of your wallet seed and secrets. Print the encrypted backup and use the Revealer overlay to decode it.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Two Factor Authentication -->
+            <article class="plugin-card">
+              <img src="assets/plugins/trustedcoin-status.png" alt="Two Factor Authentication icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Two Factor Authentication</h3>
+                <p class="plugin-description">Add two-factor authentication to your wallet using TrustedCoin. Creates a 2-of-3 multisig wallet where TrustedCoin holds one key and cosigns after 2FA verification.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-qml">Android</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Timelock Recovery -->
+            <article class="plugin-card">
+              <img src="assets/plugins/timelock_recovery_60.png" alt="Timelock Recovery icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Timelock Recovery</h3>
+                <p class="plugin-description">Create Timelock Recovery Plans for your wallet. Enables inheritance planning by setting up time-locked transactions that activate after a specified period.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- SwapServer -->
+            <article class="plugin-card">
+              <span class="plugin-icon" style="display:flex;align-items:center;justify-content:center;font-size:28px;background:#e8eef4;border-radius:4px;width:48px;height:48px;" aria-hidden="true">&#x1F501;</span>
+              <div class="plugin-info">
+                <h3 class="plugin-name">SwapServer</h3>
+                <p class="plugin-description">Offer submarine swaps to other Electrum users, enabling trustless exchanges between on-chain and Lightning in both directions.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Watchtower -->
+            <article class="plugin-card">
+              <img src="assets/plugins/watchtower.svg" alt="Watchtower icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Watchtower</h3>
+                <p class="plugin-description">Monitor Lightning channels and broadcast penalty transactions if a counterparty attempts to cheat by publishing a revoked commitment transaction.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ============================================================
+             HARDWARE WALLETS
+             ============================================================ -->
+        <section id="hardware">
+          <h2 class="section-title">Hardware Wallets</h2>
+          <div class="plugin-grid">
+
+            <!-- BitBox02 -->
+            <article class="plugin-card">
+              <img src="assets/plugins/bitbox02.png" alt="BitBox02 icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">BitBox02</h3>
+                <p class="plugin-description">Provides support for the BitBox02 hardware wallet by Shift Crypto.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Coldcard -->
+            <article class="plugin-card">
+              <img src="assets/plugins/coldcard.png" alt="Coldcard icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Coldcard</h3>
+                <p class="plugin-description">Provides support for the Coldcard hardware wallet by Coinkite.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Digital Bitbox -->
+            <article class="plugin-card">
+              <img src="assets/plugins/digitalbitbox.png" alt="Digital Bitbox icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Digital Bitbox</h3>
+                <p class="plugin-description">Provides support for the original Digital Bitbox (BitBox01) hardware wallet.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Jade -->
+            <article class="plugin-card">
+              <img src="assets/plugins/jade.png" alt="Jade icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Jade</h3>
+                <p class="plugin-description">Provides support for the Blockstream Jade hardware wallet.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- KeepKey -->
+            <article class="plugin-card">
+              <img src="assets/plugins/keepkey.png" alt="KeepKey icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">KeepKey</h3>
+                <p class="plugin-description">Provides support for the KeepKey hardware wallet.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Ledger -->
+            <article class="plugin-card">
+              <img src="assets/plugins/ledger.png" alt="Ledger icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Ledger</h3>
+                <p class="plugin-description">Provides support for Ledger hardware wallets (Nano S, Nano X, and others).</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Safe-T mini -->
+            <article class="plugin-card">
+              <img src="assets/plugins/safe-t.png" alt="Safe-T mini icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Safe-T mini</h3>
+                <p class="plugin-description">Provides support for the Archos Safe-T mini hardware wallet.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Trezor -->
+            <article class="plugin-card">
+              <img src="assets/plugins/trezor.png" alt="Trezor icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Trezor</h3>
+                <p class="plugin-description">Provides support for Trezor hardware wallets (Model One, Model T, Safe 3, and others).</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- ============================================================
+             EXTERNAL PLUGINS
+             ============================================================ -->
+        <section id="external">
+          <h2 class="section-title">External Plugins</h2>
+
+          <div class="disclaimer">
+            <strong>Disclaimer:</strong> External plugins are developed by third-party authors and are not reviewed or endorsed by the Electrum developers. Use them at your own risk. Always verify the source code before installing external plugins.
+          </div>
+
+          <div class="plugin-grid">
+
+            <!-- Guardian -->
+            <article class="plugin-card">
+              <img src="assets/plugins/plugin-default.svg" alt="Guardian icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Guardian</h3>
+                <p class="plugin-description">Physical coercion resistance for your wallet. Provides mechanisms to protect against forced disclosure of wallet contents.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-external">External</span>
+                </div>
+                <a href="https://delvingbitcoin.org/t/proposal-guardian-address-gaspv1/2006" class="plugin-link">View Announcement</a>
+                <p class="plugin-date">Added: October 2025</p>
+              </div>
+            </article>
+
+            <!-- LNURL Server -->
+            <article class="plugin-card">
+              <img src="assets/plugins/plugin-default.svg" alt="LNURL Server icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">LNURL Server</h3>
+                <p class="plugin-description">Receive Lightning Network payments through a static URL. Implements the LNURL protocol to provide a reusable payment endpoint.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
+                  <span class="badge badge-external">External</span>
+                </div>
+                <a href="https://github.com/f321x/electrum-lnurl-server" class="plugin-link">View Repository</a>
+                <p class="plugin-date">Added: October 2025</p>
+              </div>
+            </article>
+
+            <!-- Joinstr -->
+            <article class="plugin-card">
+              <img src="assets/plugins/plugin-default.svg" alt="Joinstr icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Joinstr</h3>
+                <p class="plugin-description">Collaborative transactions coordinated via Nostr relays for enhanced transaction privacy.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-external">External</span>
+                </div>
+                <a href="https://joinstr.xyz/" class="plugin-link">View Website</a>
+                <p class="plugin-date">Added: October 2025</p>
+              </div>
+            </article>
+
+            <!-- Notary -->
+            <article class="plugin-card">
+              <img src="assets/plugins/plugin-default.svg" alt="Notary icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">Notary</h3>
+                <p class="plugin-description">Proof-of-burn for Nostr events. Create a provable cost for the creation of Nostr events.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
+                  <span class="badge badge-external">External</span>
+                </div>
+                <a href="https://github.com/spesmilo/notary" class="plugin-link">View Repository</a>
+                <p class="plugin-date">Added: November 2025</p>
+              </div>
+            </article>
+
+            <!-- PayServer -->
+            <article class="plugin-card">
+              <img src="assets/plugins/plugin-default.svg" alt="PayServer icon" class="plugin-icon" loading="lazy" width="48" height="48">
+              <div class="plugin-info">
+                <h3 class="plugin-name">PayServer</h3>
+                <p class="plugin-description">HTTP server for receiving Bitcoin payments. Provides a self-hosted payment processing endpoint for merchants and services.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
+                  <span class="badge badge-external">External</span>
+                </div>
+                <a href="https://github.com/spesmilo/electrum-payserver" class="plugin-link">View Repository</a>
+                <p class="plugin-date">Added: November 2025</p>
+              </div>
+            </article>
+
+            <!-- ADD NEW EXTERNAL PLUGIN ABOVE THIS LINE -->
+
+          </div>
+
+          <!-- Submit CTA -->
+          <div class="submit-cta">
+            <h3>Have a plugin to share?</h3>
+            <p>Submit your external plugin by opening a pull request to the website repository.</p>
+            <a href="https://github.com/f321x/electrum-plugins-website/blob/master/CONTRIBUTING.md" class="btn btn-primary">Submit a Plugin</a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="https://electrum.org">electrum.org</a>
+          <a href="https://github.com/spesmilo/electrum">Electrum GitHub</a>
+          <a href="https://github.com/f321x/electrum-plugins-website">Website GitHub</a>
+        </div>
+        <p class="footer-copy">Electrum is MIT licensed open-source software.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electrum Plugins — Extend Your Bitcoin Wallet</title>
+  <meta name="description" content="Browse and discover plugins for the Electrum Bitcoin wallet. Utility plugins, hardware wallet support, and community extensions.">
+  <link rel="canonical" href="https://plugins.electrum.org/">
+  <meta property="og:title" content="Electrum Plugins — Extend Your Bitcoin Wallet">
+  <meta property="og:description" content="Browse and discover plugins for the Electrum Bitcoin wallet. Utility plugins, hardware wallet support, and community extensions.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://plugins.electrum.org/">
+  <link rel="icon" href="assets/icons/electrum_darkblue.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Electrum Plugins",
+    "url": "https://plugins.electrum.org/",
+    "description": "Plugin directory for the Electrum Bitcoin wallet"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        <img src="assets/icons/electrum_darkblue.svg" alt="Electrum logo" width="32" height="32">
+        Electrum Plugins
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="plugins.html">Plugins</a></li>
+          <li><a href="developers.html">Developers</a></li>
+          <li><a href="https://electrum.org" class="nav-external">electrum.org</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Extend Your Electrum Wallet</h1>
+      <p>Discover plugins that add hardware wallet support, multi-signature coordination, Lightning tools, and more to Electrum.</p>
+      <div class="hero-buttons">
+        <a href="plugins.html" class="btn btn-primary">Browse Plugins</a>
+        <a href="developers.html" class="btn btn-outline">Build a Plugin</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Category Cards -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Plugin Categories</h2>
+        <div class="category-grid">
+
+          <a href="plugins.html#utility" class="category-card">
+            <span class="category-icon" aria-hidden="true">&#9881;</span>
+            <h3>Utility Plugins</h3>
+            <p>Label sync, 2FA, Nostr integrations, swap server, and more built-in tools.</p>
+            <span class="card-count">9 plugins</span>
+          </a>
+
+          <a href="plugins.html#hardware" class="category-card">
+            <span class="category-icon" aria-hidden="true">&#128273;</span>
+            <h3>Hardware Wallets</h3>
+            <p>Trezor, Ledger, Coldcard, BitBox02, Jade, and other hardware wallet integrations.</p>
+            <span class="card-count">8 plugins</span>
+          </a>
+
+          <a href="plugins.html#external" class="category-card">
+            <span class="category-icon" aria-hidden="true">&#128268;</span>
+            <h3>External Plugins</h3>
+            <p>Community-built extensions for privacy, payments, and advanced features.</p>
+            <span class="card-count">5 plugins</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section class="section">
+      <div class="container">
+        <div class="quick-start">
+          <h2>Enabling Plugins in Electrum</h2>
+          <ol>
+            <li><strong>Open Electrum</strong> and go to <strong>Tools &rarr; Plugins</strong>.</li>
+            <li><strong>Internal plugins</strong> are listed in the dialog. Toggle the checkbox to enable or disable them.</li>
+            <li><strong>External plugins</strong> can be imported from <code>.zip</code> files by clicking the <strong>Add</strong> button in the plugins dialog.</li>
+            <li>Some plugins (hardware wallets) are automatically enabled when you create or restore a hardware wallet.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="https://electrum.org">electrum.org</a>
+          <a href="https://github.com/spesmilo/electrum">Electrum GitHub</a>
+          <a href="https://github.com/f321x/electrum-plugins-website">Website GitHub</a>
+        </div>
+        <p class="footer-copy">Electrum is MIT licensed open-source software.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
