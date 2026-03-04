@@ -103,6 +103,9 @@
             <li><strong>External plugins</strong> can be imported from <code>.zip</code> files by clicking the <strong>Add</strong> button in the plugins dialog.</li>
             <li>Some plugins (hardware wallets) are automatically enabled when you create or restore a hardware wallet.</li>
           </ol>
+          <div class="disclaimer">
+            <strong>First-time setup:</strong> When loading an external plugin for the first time, Electrum will ask you to set a <strong>plugin password</strong>. This password is independent of your wallet and can be reset if forgotten. To verify plugin authenticity on subsequent startups without re-entering the password, Electrum requires you to store a public key string with root permissions. The root permissions prevent malware from modifying the key.
+          </div>
         </div>
       </div>
     </section>
