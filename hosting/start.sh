@@ -3,7 +3,9 @@ set -euo pipefail
 
 CONTAINER_NAME="electrum-plugins-website"
 IMAGE_NAME="electrum-plugins-website"
-PORT=80
+PORT_HTTP=80
+PORT_HTTPS=443
+VOLUME_NAME="caddy_data"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
@@ -42,11 +44,13 @@ docker build \
 rm -rf "$SCRIPT_DIR/site"
 
 # Run container
-echo "Starting container '${CONTAINER_NAME}' on port ${PORT}..."
+echo "Starting container '${CONTAINER_NAME}'..."
 docker run -d \
     --name "${CONTAINER_NAME}" \
     --restart unless-stopped \
-    -p "${PORT}:${PORT}" \
+    -p "${PORT_HTTP}:${PORT_HTTP}" \
+    -p "${PORT_HTTPS}:${PORT_HTTPS}" \
+    -v "${VOLUME_NAME}:/data" \
     "${IMAGE_NAME}"
 
-echo "Container '${CONTAINER_NAME}' is running on port ${PORT}."
+echo "Container '${CONTAINER_NAME}' is running on ports ${PORT_HTTP} and ${PORT_HTTPS}."
