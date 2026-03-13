@@ -35,7 +35,7 @@ New external plugins go in `plugins.html` above the `<!-- ADD NEW EXTERNAL PLUGI
 
 ## Key Files
 
-- `css/style.css` — all styling (884 lines, mobile-first responsive)
+- `css/style.css` — all styling (mobile-first responsive)
 - `hosting/Caddyfile` — web server config
 - `hosting/start.sh` — Docker build and deploy script
 - `hosting/Dockerfile` — Caddy 2 Alpine image
