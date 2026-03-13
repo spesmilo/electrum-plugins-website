@@ -34,7 +34,6 @@ Use this template:
       <span class="badge badge-external">External</span>
     </div>
     <a href="REPO_URL" class="plugin-link">View Repository</a>
-    <p class="plugin-date">Added: MONTH YEAR</p>
   </div>
 </article>
 ```
@@ -47,7 +46,6 @@ Use this template:
 | `BRIEF_DESCRIPTION` | One or two sentences describing functionality | `Enables automatic coin selection based on privacy heuristics.` |
 | `PLATFORM` | The badge class and label for your plugin's GUI type (see below) | `qt` with label `Desktop` |
 | `REPO_URL` | Full URL to your plugin's repository | `https://github.com/user/my-plugin` |
-| `MONTH YEAR` | Current month and year | `March 2026` |
 
 **Platform badge classes and labels:**
 - `badge-qt` — Desktop GUI (label: `Desktop`)
