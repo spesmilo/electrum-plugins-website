@@ -24,10 +24,6 @@
   --color-warning: #e8a030;
   --color-warning-bg: #fef8ee;
   --color-warning-border: #f0d090;
-  --color-badge-qt: #41cd52;
-  --color-badge-qml: #9b59b6;
-  --color-badge-cli: #e67e22;
-  --color-badge-internal: #3498db;
   --color-badge-external: #e74c3c;
 
   /* Typography */
@@ -329,8 +325,9 @@ h1, h2, h3, h4, h5, h6 {
   font-size: var(--font-size-lg);
 }
 
-#hardware,
-#external {
+#android,
+#services,
+#hardware {
   margin-top: var(--space-2xl);
 }
 
@@ -366,16 +363,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-light);
   margin-bottom: var(--space-md);
   font-size: var(--font-size-sm);
-}
-
-.category-card .card-count {
-  display: inline-block;
-  background-color: var(--color-bg-code);
-  color: var(--color-primary);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
 }
 
 .category-icon {
@@ -526,34 +513,9 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.03em;
 }
 
-.badge-qt {
-  background-color: rgba(65, 205, 82, 0.15);
-  color: #2d9a3e;
-}
-
-.badge-qml {
-  background-color: rgba(155, 89, 182, 0.15);
-  color: #7d3c98;
-}
-
-.badge-cli {
-  background-color: rgba(230, 126, 34, 0.15);
-  color: #c0612b;
-}
-
-.badge-internal {
-  background-color: rgba(52, 152, 219, 0.15);
-  color: #2471a3;
-}
-
 .badge-external {
   background-color: rgba(231, 76, 60, 0.15);
   color: #c0392b;
-}
-
-.badge-daemon {
-  background-color: rgba(149, 165, 166, 0.15);
-  color: #5a6a6e;
 }
 
 /* --------------------------------------------------------------------------

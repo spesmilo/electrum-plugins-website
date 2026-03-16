@@ -18,7 +18,13 @@ Before submitting, make sure your plugin meets these criteria:
 
 ### 2. Edit `plugins.html`
 
-Find the comment `<!-- ADD NEW EXTERNAL PLUGIN ABOVE THIS LINE -->` in the External Plugins section and add a new plugin card **above** that line.
+Add a new plugin card to the appropriate category section(s) in `plugins.html`, **above** the corresponding comment marker:
+
+- **Desktop** (Qt GUI) — add above `<!-- ADD NEW EXTERNAL DESKTOP PLUGIN ABOVE THIS LINE -->`
+- **Android** (QML GUI) — add above `<!-- ADD NEW EXTERNAL ANDROID PLUGIN ABOVE THIS LINE -->`
+- **Services / Command Line** (Daemon/CLI) — add above `<!-- ADD NEW EXTERNAL CLI PLUGIN ABOVE THIS LINE -->`
+
+If your plugin supports multiple platforms, add a card to each applicable category section.
 
 Use this template:
 
@@ -30,7 +36,6 @@ Use this template:
     <h3 class="plugin-name">PLUGIN_NAME</h3>
     <p class="plugin-description">BRIEF_DESCRIPTION</p>
     <div class="plugin-meta">
-      <span class="badge badge-PLATFORM">PLATFORM_LABEL</span>
       <span class="badge badge-external">External</span>
     </div>
     <a href="REPO_URL" class="plugin-link">View Repository</a>
@@ -44,15 +49,7 @@ Use this template:
 |---|---|---|
 | `PLUGIN_NAME` | Display name of your plugin | `My Plugin` |
 | `BRIEF_DESCRIPTION` | One or two sentences describing functionality | `Enables automatic coin selection based on privacy heuristics.` |
-| `PLATFORM` | The badge class and label for your plugin's GUI type (see below) | `qt` with label `Desktop` |
 | `REPO_URL` | Full URL to your plugin's repository | `https://github.com/user/my-plugin` |
-
-**Platform badge classes and labels:**
-- `badge-qt` — Desktop GUI (label: `Desktop`)
-- `badge-qml` — Android GUI (label: `Android`)
-- `badge-cli` — Command-line / daemon plugin (label: `CLI`)
-
-If your plugin supports multiple platforms, add multiple badge spans.
 
 ### 4. (Optional) Add a custom icon
 
