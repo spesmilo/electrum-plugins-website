@@ -28,7 +28,7 @@ This builds a Caddy 2 Alpine image, copies site files, and runs on port 80.
 - **Services / Command Line** — Daemon/CLI plugins (SwapServer, Watchtower, etc.)
 - **Hardware Wallets** — Trezor, Ledger, Coldcard, BitBox02, etc.
 
-Plugins supporting multiple platforms are duplicated across categories. Each plugin is an `<article class="plugin-card">` with icon, name, description, and links. Internal plugins have no badges; external plugins carry a `badge-external` badge.
+Plugins supporting multiple platforms are duplicated across categories. Each plugin is an `<article class="plugin-card">` with icon, name, description, and links. Internal plugins have no special styling; external plugins use the `plugin-card-external` class (adds a red left border) and an inline `plugin-external-label` span showing "· External" next to the plugin name.
 
 ## Adding External Plugins
 
