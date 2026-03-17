@@ -20,11 +20,8 @@ Before submitting, make sure your plugin meets these criteria:
 
 Add a new plugin card to the appropriate category section(s) in `plugins.html`, **above** the corresponding comment marker:
 
-- **Desktop** (Qt GUI) — add above `<!-- ADD NEW EXTERNAL DESKTOP PLUGIN ABOVE THIS LINE -->`
-- **Android** (QML GUI) — add above `<!-- ADD NEW EXTERNAL ANDROID PLUGIN ABOVE THIS LINE -->`
-- **Services / Command Line** (Daemon/CLI) — add above `<!-- ADD NEW EXTERNAL CLI PLUGIN ABOVE THIS LINE -->`
-
-If your plugin supports multiple platforms, add a card to each applicable category section.
+- **Graphical User Interface** (Qt/QML GUI) — add above `<!-- ADD NEW EXTERNAL DESKTOP PLUGIN ABOVE THIS LINE -->`
+- **Daemon only** (CLI/Daemon) — add above `<!-- ADD NEW EXTERNAL CLI PLUGIN ABOVE THIS LINE -->`
 
 Use this template:
 
@@ -36,6 +33,7 @@ Use this template:
     <h3 class="plugin-name">PLUGIN_NAME</h3>
     <p class="plugin-description">BRIEF_DESCRIPTION</p>
     <div class="plugin-meta">
+      <span class="badge badge-qt">Desktop</span>
       <span class="badge badge-external">External</span>
     </div>
     <a href="REPO_URL" class="plugin-link">View Repository</a>
@@ -43,7 +41,19 @@ Use this template:
 </article>
 ```
 
-### 3. Fill in the fields
+### 3. Add the correct platform badge
+
+Replace or add the appropriate platform badge in the `plugin-meta` div alongside the `External` badge:
+
+| Badge class | Label | Use when |
+|---|---|---|
+| `badge-qt` | Desktop | Plugin has a Qt GUI |
+| `badge-qml` | Android | Plugin has a QML GUI |
+| `badge-cli` | CLI | Plugin is daemon/CLI only |
+
+For example, a CLI-only plugin would use `<span class="badge badge-cli">CLI</span>` instead of the `badge-qt` shown in the template.
+
+### 4. Fill in the fields
 
 | Field | Description | Example |
 |---|---|---|
@@ -51,14 +61,14 @@ Use this template:
 | `BRIEF_DESCRIPTION` | One or two sentences describing functionality | `Enables automatic coin selection based on privacy heuristics.` |
 | `REPO_URL` | Full URL to your plugin's repository | `https://github.com/user/my-plugin` |
 
-### 4. (Optional) Add a custom icon
+### 5. (Optional) Add a custom icon
 
 If you want a custom icon instead of the default placeholder:
 
 1. Add a PNG image (48x48 or larger, square) to `assets/plugins/`
 2. Update the `<img src="...">` path in your plugin card
 
-### 5. Open a pull request
+### 6. Open a pull request
 
 - Title: `Add PLUGIN_NAME to external plugins`
 - Description: Brief explanation of your plugin and a link to the repository

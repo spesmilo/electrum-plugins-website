@@ -22,17 +22,16 @@ This builds a Caddy 2 Alpine image, copies site files, and runs on port 80.
 
 ## Content Structure
 
-`plugins.html` contains 4 plugin categories organized by platform:
-- **Desktop** — Qt GUI plugins (Audio MODEM, LabelSync, Revealer, etc.)
-- **Android** — QML GUI plugins (LabelSync, Nostr Cosigner, Two Factor Auth)
-- **Services / Command Line** — Daemon/CLI plugins (SwapServer, Watchtower, etc.)
+`plugins.html` contains 3 plugin categories:
+- **Graphical User Interface** — Qt/QML GUI plugins (Audio MODEM, LabelSync, Revealer, etc.)
+- **Daemon only** — CLI/Daemon plugins (SwapServer, Watchtower, etc.)
 - **Hardware Wallets** — Trezor, Ledger, Coldcard, BitBox02, etc.
 
-Plugins supporting multiple platforms are duplicated across categories. Each plugin is an `<article class="plugin-card">` with icon, name, description, and links. Internal plugins have no badges; external plugins carry a `badge-external` badge.
+Each plugin is an `<article class="plugin-card">` with icon, name, description, and links. Plugins carry platform badges (`badge-qt` for Desktop, `badge-qml` for Android, `badge-cli` for CLI) indicating which platforms they support. External plugins also carry a `badge-external` badge.
 
 ## Adding External Plugins
 
-New external plugins go in the appropriate category section(s) of `plugins.html` above the corresponding comment marker (`<!-- ADD NEW EXTERNAL DESKTOP PLUGIN ABOVE THIS LINE -->`, `<!-- ADD NEW EXTERNAL ANDROID PLUGIN ABOVE THIS LINE -->`, or `<!-- ADD NEW EXTERNAL CLI PLUGIN ABOVE THIS LINE -->`). If a plugin supports multiple platforms, add it to each relevant section. Plugin icons go in `assets/plugins/` (48x48+ PNG/SVG). See `CONTRIBUTING.md` for the full card template.
+New external plugins go in the appropriate category section of `plugins.html` above the corresponding comment marker (`<!-- ADD NEW EXTERNAL DESKTOP PLUGIN ABOVE THIS LINE -->` or `<!-- ADD NEW EXTERNAL CLI PLUGIN ABOVE THIS LINE -->`). Plugin icons go in `assets/plugins/` (48x48+ PNG/SVG). See `CONTRIBUTING.md` for the full card template.
 
 ## Key Files
 

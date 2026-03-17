@@ -56,9 +56,8 @@
 
         <!-- Section Navigation -->
         <nav class="section-nav" aria-label="Plugin categories">
-          <a href="#desktop">Desktop</a>
-          <a href="#android">Android</a>
-          <a href="#services">Services / Command Line</a>
+          <a href="#desktop">Graphical User Interface</a>
+          <a href="#daemon">Daemon only</a>
           <a href="#hardware">Hardware Wallets</a>
         </nav>
 
@@ -67,10 +66,10 @@
         </div>
 
         <!-- ============================================================
-             DESKTOP (Qt GUI)
+             GRAPHICAL USER INTERFACE (Qt/QML GUI)
              ============================================================ -->
         <section id="desktop">
-          <h2 class="section-title">Desktop</h2>
+          <h2 class="section-title">Graphical User Interface</h2>
           <div class="plugin-grid">
 
             <!-- Audio MODEM -->
@@ -79,6 +78,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Audio MODEM</h3>
                 <p class="plugin-description">Provides support for air-gapped transaction signing using sound waves between devices.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
               </div>
             </article>
 
@@ -88,6 +90,11 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">LabelSync</h3>
                 <p class="plugin-description">Save and synchronize wallet labels across multiple devices. Labels, transaction IDs, and addresses are encrypted before being sent to the remote server.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-qml">Android</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
               </div>
             </article>
 
@@ -97,6 +104,10 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Nostr Cosigner</h3>
                 <p class="plugin-description">Multi-signature transaction coordination using Nostr relays. Allows cosigners to exchange partially signed transactions over the Nostr network.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-qml">Android</span>
+                </div>
               </div>
             </article>
 
@@ -106,6 +117,10 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Nostr Wallet Connect</h3>
                 <p class="plugin-description">Remote control of Lightning wallets via Nostr protocol (NIP-47). Enables third-party apps to interact with your Lightning node.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
               </div>
             </article>
 
@@ -115,6 +130,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Revealer</h3>
                 <p class="plugin-description">Create visually encrypted backups of your wallet seed and secrets. Print the encrypted backup and use the Revealer overlay to decode it.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
               </div>
             </article>
 
@@ -124,6 +142,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Timelock Recovery</h3>
                 <p class="plugin-description">Create Timelock Recovery Plans for your wallet. Enables inheritance planning by setting up time-locked transactions that activate after a specified period.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
               </div>
             </article>
 
@@ -133,6 +154,10 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Two Factor Authentication</h3>
                 <p class="plugin-description">Add two-factor authentication to your wallet using TrustedCoin. Creates a 2-of-3 multisig wallet where TrustedCoin holds one key and cosigns after 2FA verification.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-qml">Android</span>
+                </div>
               </div>
             </article>
 
@@ -143,6 +168,7 @@
                 <h3 class="plugin-name">Bitcoin After Life</h3>
                 <p class="plugin-description">Decentralized inheritance planning through time-locked transactions. Sign transactions and send them to Will-Executors who broadcast them at specified dates.</p>
                 <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
                   <span class="badge badge-external">External</span>
                 </div>
                 <a href="https://bitcoin-after.life" class="plugin-link">View Website</a>
@@ -156,6 +182,7 @@
                 <h3 class="plugin-name">Guardian</h3>
                 <p class="plugin-description">Physical coercion resistance for your wallet. Provides mechanisms to protect against forced disclosure of wallet contents.</p>
                 <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
                   <span class="badge badge-external">External</span>
                 </div>
                 <a href="https://github.com/bitcoinguardian/electrum/tree/master/electrum/plugins/guardian" class="plugin-link">View Repository</a>
@@ -169,6 +196,7 @@
                 <h3 class="plugin-name">Joinstr</h3>
                 <p class="plugin-description">Collaborative transactions coordinated via Nostr relays for enhanced transaction privacy.</p>
                 <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
                   <span class="badge badge-external">External</span>
                 </div>
                 <a href="https://joinstr.xyz/" class="plugin-link">View Website</a>
@@ -181,68 +209,11 @@
         </section>
 
         <!-- ============================================================
-             ANDROID (QML GUI)
+             DAEMON ONLY (CLI/Daemon)
              ============================================================ -->
-        <section id="android">
-          <h2 class="section-title">Android</h2>
+        <section id="daemon">
+          <h2 class="section-title">Daemon only</h2>
           <div class="plugin-grid">
-
-            <!-- LabelSync -->
-            <article class="plugin-card">
-              <img src="assets/plugins/labelsync.png" alt="LabelSync icon" class="plugin-icon" loading="lazy" width="48" height="48">
-              <div class="plugin-info">
-                <h3 class="plugin-name">LabelSync</h3>
-                <p class="plugin-description">Save and synchronize wallet labels across multiple devices. Labels, transaction IDs, and addresses are encrypted before being sent to the remote server.</p>
-              </div>
-            </article>
-
-            <!-- Nostr Cosigner -->
-            <article class="plugin-card">
-              <img src="assets/plugins/nostr_multisig.png" alt="Nostr Cosigner icon" class="plugin-icon" loading="lazy" width="48" height="48">
-              <div class="plugin-info">
-                <h3 class="plugin-name">Nostr Cosigner</h3>
-                <p class="plugin-description">Multi-signature transaction coordination using Nostr relays. Allows cosigners to exchange partially signed transactions over the Nostr network.</p>
-              </div>
-            </article>
-
-            <!-- Two Factor Authentication -->
-            <article class="plugin-card">
-              <img src="assets/plugins/trustedcoin-status.png" alt="Two Factor Authentication icon" class="plugin-icon" loading="lazy" width="48" height="48">
-              <div class="plugin-info">
-                <h3 class="plugin-name">Two Factor Authentication</h3>
-                <p class="plugin-description">Add two-factor authentication to your wallet using TrustedCoin. Creates a 2-of-3 multisig wallet where TrustedCoin holds one key and cosigns after 2FA verification.</p>
-              </div>
-            </article>
-
-            <!-- ADD NEW EXTERNAL ANDROID PLUGIN ABOVE THIS LINE -->
-
-          </div>
-        </section>
-
-        <!-- ============================================================
-             SERVICES / COMMAND LINE (Daemon/CLI)
-             ============================================================ -->
-        <section id="services">
-          <h2 class="section-title">Services / Command Line</h2>
-          <div class="plugin-grid">
-
-            <!-- LabelSync -->
-            <article class="plugin-card">
-              <img src="assets/plugins/labelsync.png" alt="LabelSync icon" class="plugin-icon" loading="lazy" width="48" height="48">
-              <div class="plugin-info">
-                <h3 class="plugin-name">LabelSync</h3>
-                <p class="plugin-description">Save and synchronize wallet labels across multiple devices. Labels, transaction IDs, and addresses are encrypted before being sent to the remote server.</p>
-              </div>
-            </article>
-
-            <!-- Nostr Wallet Connect -->
-            <article class="plugin-card">
-              <img src="assets/plugins/nwc.png" alt="Nostr Wallet Connect icon" class="plugin-icon" loading="lazy" width="48" height="48">
-              <div class="plugin-info">
-                <h3 class="plugin-name">Nostr Wallet Connect</h3>
-                <p class="plugin-description">Remote control of Lightning wallets via Nostr protocol (NIP-47). Enables third-party apps to interact with your Lightning node.</p>
-              </div>
-            </article>
 
             <!-- SwapServer -->
             <article class="plugin-card">
@@ -250,6 +221,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">SwapServer</h3>
                 <p class="plugin-description">Offer submarine swaps to other Electrum users, enabling trustless exchanges between on-chain and Lightning in both directions.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
+                </div>
                 <a href="https://electrum.readthedocs.io/en/latest/swapserver.html" class="plugin-link">Documentation</a>
               </div>
             </article>
@@ -260,6 +234,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Watchtower</h3>
                 <p class="plugin-description">Monitor Lightning channels and broadcast penalty transactions if a counterparty attempts to cheat by publishing a revoked commitment transaction.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
+                </div>
               </div>
             </article>
 
@@ -270,6 +247,7 @@
                 <h3 class="plugin-name">LNURL Server</h3>
                 <p class="plugin-description">Receive Lightning Network payments through a static URL. Implements the LNURL protocol to provide a reusable payment endpoint.</p>
                 <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
                   <span class="badge badge-external">External</span>
                 </div>
                 <a href="https://github.com/f321x/electrum-lnurl-server" class="plugin-link">View Repository</a>
@@ -283,6 +261,7 @@
                 <h3 class="plugin-name">Notary</h3>
                 <p class="plugin-description">Proof-of-burn for Nostr events. Create a provable cost for the creation of Nostr events.</p>
                 <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
                   <span class="badge badge-external">External</span>
                 </div>
                 <a href="https://github.com/spesmilo/notary" class="plugin-link">View Repository</a>
@@ -296,6 +275,7 @@
                 <h3 class="plugin-name">PayServer</h3>
                 <p class="plugin-description">HTTP server for receiving Bitcoin payments. Provides a self-hosted payment processing endpoint for merchants and services.</p>
                 <div class="plugin-meta">
+                  <span class="badge badge-cli">CLI</span>
                   <span class="badge badge-external">External</span>
                 </div>
                 <a href="https://github.com/spesmilo/electrum-payserver" class="plugin-link">View Repository</a>
@@ -320,6 +300,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">BitBox02</h3>
                 <p class="plugin-description">Provides support for the BitBox02 hardware wallet by Shift Crypto.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
               </div>
             </article>
 
@@ -329,6 +312,10 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Coldcard</h3>
                 <p class="plugin-description">Provides support for the Coldcard hardware wallet by Coinkite.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
               </div>
             </article>
 
@@ -338,6 +325,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Digital Bitbox</h3>
                 <p class="plugin-description">Provides support for the original Digital Bitbox (BitBox01) hardware wallet.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
               </div>
             </article>
 
@@ -347,6 +337,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Jade</h3>
                 <p class="plugin-description">Provides support for the Blockstream Jade hardware wallet.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
               </div>
             </article>
 
@@ -356,6 +349,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">KeepKey</h3>
                 <p class="plugin-description">Provides support for the KeepKey hardware wallet.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
               </div>
             </article>
 
@@ -365,6 +361,10 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Ledger</h3>
                 <p class="plugin-description">Provides support for Ledger hardware wallets (Nano S, Nano X, and others).</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
               </div>
             </article>
 
@@ -374,6 +374,9 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Safe-T mini</h3>
                 <p class="plugin-description">Provides support for the Archos Safe-T mini hardware wallet.</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                </div>
               </div>
             </article>
 
@@ -383,6 +386,10 @@
               <div class="plugin-info">
                 <h3 class="plugin-name">Trezor</h3>
                 <p class="plugin-description">Provides support for Trezor hardware wallets (Model One, Model T, Safe 3, and others).</p>
+                <div class="plugin-meta">
+                  <span class="badge badge-qt">Desktop</span>
+                  <span class="badge badge-cli">CLI</span>
+                </div>
               </div>
             </article>
 
