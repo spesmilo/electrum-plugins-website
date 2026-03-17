@@ -511,21 +511,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .plugin-link {
   display: inline-block;
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  letter-spacing: 0.03em;
+  font-size: var(--font-size-sm);
   margin-top: var(--space-sm);
-  padding: 4px 12px;
-  border: 2px solid var(--color-accent);
-  border-radius: 14px;
-  transition: background-color var(--transition), color var(--transition);
-}
-
-.plugin-link:hover,
-.plugin-link:focus-visible {
-  background-color: var(--color-accent);
-  color: #ffffff;
-  outline: none;
 }
 
 .plugin-date {
