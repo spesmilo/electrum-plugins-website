@@ -21,6 +21,12 @@
   --color-text-muted: #8a9aaa;
   --color-border: #dce4ec;
   --color-border-light: #e8eef4;
+  --color-badge-qt-bg: rgba(65, 205, 82, 0.15);
+  --color-badge-qt: #2d9a3e;
+  --color-badge-qml-bg: rgba(155, 89, 182, 0.15);
+  --color-badge-qml: #7d3c98;
+  --color-badge-cli-bg: rgba(230, 126, 34, 0.15);
+  --color-badge-cli: #c0612b;
   --color-warning: #e8a030;
   --color-warning-bg: #fef8ee;
   --color-warning-border: #f0d090;
@@ -525,23 +531,112 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .badge-qt {
-  background-color: rgba(65, 205, 82, 0.15);
-  color: #2d9a3e;
+  background-color: var(--color-badge-qt-bg);
+  color: var(--color-badge-qt);
 }
 
 .badge-qml {
-  background-color: rgba(155, 89, 182, 0.15);
-  color: #7d3c98;
+  background-color: var(--color-badge-qml-bg);
+  color: var(--color-badge-qml);
 }
 
 .badge-cli {
-  background-color: rgba(230, 126, 34, 0.15);
-  color: #c0612b;
+  background-color: var(--color-badge-cli-bg);
+  color: var(--color-badge-cli);
 }
 
 .badge-external {
   background-color: rgba(231, 76, 60, 0.15);
   color: #c0392b;
+}
+
+/* --------------------------------------------------------------------------
+   Plugin Filters (CSS-only, plugins.html)
+   -------------------------------------------------------------------------- */
+.plugin-filter-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.plugin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  margin-bottom: var(--space-xl);
+}
+
+.filter-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-light);
+  margin-right: var(--space-xs);
+}
+
+.filter-btn {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 20px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid var(--color-border);
+  color: var(--color-text-light);
+  background-color: var(--color-bg-white);
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Active filter button states */
+#filter-all:checked ~ label[for="filter-all"] {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+}
+
+#filter-desktop:checked ~ label[for="filter-desktop"] {
+  background-color: var(--color-badge-qt-bg);
+  color: var(--color-badge-qt);
+  border-color: var(--color-badge-qt);
+}
+
+#filter-android:checked ~ label[for="filter-android"] {
+  background-color: var(--color-badge-qml-bg);
+  color: var(--color-badge-qml);
+  border-color: var(--color-badge-qml);
+}
+
+#filter-cli:checked ~ label[for="filter-cli"] {
+  background-color: var(--color-badge-cli-bg);
+  color: var(--color-badge-cli);
+  border-color: var(--color-badge-cli);
+}
+
+/* Hide non-matching plugin cards when a filter is active */
+body:has(#filter-desktop:checked) .plugin-card:not(:has(.badge-qt)) {
+  display: none;
+}
+
+body:has(#filter-android:checked) .plugin-card:not(:has(.badge-qml)) {
+  display: none;
+}
+
+body:has(#filter-cli:checked) .plugin-card:not(:has(.badge-cli)) {
+  display: none;
+}
+
+/* Hide entire category sections when they contain no matching cards */
+body:has(#filter-desktop:checked) section[id]:not(:has(.badge-qt)),
+body:has(#filter-android:checked) section[id]:not(:has(.badge-qml)),
+body:has(#filter-cli:checked) section[id]:not(:has(.badge-cli)) {
+  display: none;
 }
 
 /* --------------------------------------------------------------------------
