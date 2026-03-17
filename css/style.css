@@ -27,8 +27,8 @@
   --color-badge-qml: #7d3c98;
   --color-badge-cli-bg: rgba(230, 126, 34, 0.15);
   --color-badge-cli: #c0612b;
-  --color-badge-external-bg: rgba(231, 76, 60, 0.15);
-  --color-badge-external: #c0392b;
+  --color-badge-internal-bg: rgba(74, 158, 255, 0.15);
+  --color-badge-internal: #2d7abf;
   --color-warning: #e8a030;
   --color-warning-bg: #fef8ee;
   --color-warning-border: #f0d090;
@@ -549,9 +549,9 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-badge-cli);
 }
 
-.badge-external {
-  background-color: var(--color-badge-external-bg);
-  color: var(--color-badge-external);
+.badge-internal {
+  background-color: var(--color-badge-internal-bg);
+  color: var(--color-badge-internal);
 }
 
 /* --------------------------------------------------------------------------
@@ -608,12 +608,6 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--color-badge-cli);
 }
 
-#filter-external:checked ~ label[for="filter-external"] {
-  background-color: var(--color-badge-external-bg);
-  color: var(--color-badge-external);
-  border-color: var(--color-badge-external);
-}
-
 /* Hide non-matching plugin cards when a filter is active */
 body:has(#filter-desktop:checked) .plugin-card:not(:has(.badge-qt)) {
   display: none;
@@ -627,15 +621,10 @@ body:has(#filter-cli:checked) .plugin-card:not(:has(.badge-cli)) {
   display: none;
 }
 
-body:has(#filter-external:checked) .plugin-card:not(:has(.badge-external)) {
-  display: none;
-}
-
 /* Hide entire category sections when they contain no matching cards */
 body:has(#filter-desktop:checked) section[id]:not(:has(.badge-qt)),
 body:has(#filter-android:checked) section[id]:not(:has(.badge-qml)),
-body:has(#filter-cli:checked) section[id]:not(:has(.badge-cli)),
-body:has(#filter-external:checked) section[id]:not(:has(.badge-external)) {
+body:has(#filter-cli:checked) section[id]:not(:has(.badge-cli)) {
   display: none;
 }
 

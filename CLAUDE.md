@@ -27,7 +27,7 @@ This builds a Caddy 2 Alpine image, copies site files, and runs on port 80.
 - **Daemon only** — CLI/Daemon plugins (SwapServer, Watchtower, etc.)
 - **Hardware Wallets** — Trezor, Ledger, Coldcard, BitBox02, etc.
 
-Each plugin is an `<article class="plugin-card">` with icon, name, description, and links. Plugins carry platform badges (`badge-qt` for Desktop, `badge-qml` for Android, `badge-cli` for CLI) indicating which platforms they support. External plugins also carry a `badge-external` badge.
+Each plugin is an `<article class="plugin-card">` with icon, name, description, and links. Plugins carry platform badges (`badge-qt` for Desktop, `badge-qml` for Android, `badge-cli` for CLI) indicating which platforms they support. Included plugins (bundled with Electrum) carry a `badge-internal` badge labeled "Included".
 
 ## Adding External Plugins
 

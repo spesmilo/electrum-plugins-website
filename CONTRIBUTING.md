@@ -34,7 +34,6 @@ Use this template:
     <p class="plugin-description">BRIEF_DESCRIPTION</p>
     <div class="plugin-meta">
       <span class="badge badge-qt">Desktop</span>
-      <span class="badge badge-external">External</span>
     </div>
     <a href="REPO_URL" class="plugin-link">View Repository</a>
   </div>
@@ -43,7 +42,7 @@ Use this template:
 
 ### 3. Add the correct platform badge
 
-Replace or add the appropriate platform badge in the `plugin-meta` div alongside the `External` badge:
+Replace or add the appropriate platform badge in the `plugin-meta` div:
 
 | Badge class | Label | Use when |
 |---|---|---|
