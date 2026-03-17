@@ -30,11 +30,14 @@ Use this template:
 
 ```html
 <!-- Plugin Name -->
-<article class="plugin-card plugin-card-external">
+<article class="plugin-card">
   <img src="assets/plugins/plugin-default.svg" alt="PLUGIN_NAME icon" class="plugin-icon" loading="lazy" width="48" height="48">
   <div class="plugin-info">
-    <h3 class="plugin-name">PLUGIN_NAME <span class="plugin-external-label">· External</span></h3>
+    <h3 class="plugin-name">PLUGIN_NAME</h3>
     <p class="plugin-description">BRIEF_DESCRIPTION</p>
+    <div class="plugin-meta">
+      <span class="badge badge-external">External</span>
+    </div>
     <a href="REPO_URL" class="plugin-link">View Repository</a>
   </div>
 </article>
