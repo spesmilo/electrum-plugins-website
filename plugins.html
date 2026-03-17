@@ -58,16 +58,15 @@
           <strong>Disclaimer:</strong> Plugins that are not included in Electrum are marked as <em>External</em>. They are developed by third-party authors and are not reviewed or endorsed by the Electrum developers. Use them at your own risk. Always verify the source code before installing external plugins.
         </div>
 
-        <!-- Section Navigation -->
-        <nav class="section-nav" aria-label="Plugin categories">
-          <a href="#desktop">Graphical User Interface</a>
-          <a href="#daemon">Daemon only</a>
-          <a href="#hardware">Hardware Wallets</a>
-        </nav>
-
-        <!-- Platform Filters -->
-        <div class="plugin-filters">
-          <span class="filter-label">Filter:</span>
+        <!-- Plugin Toolbar: Navigation + Filters -->
+        <div class="plugin-toolbar">
+          <nav class="toolbar-nav" aria-label="Plugin categories">
+            <a href="#desktop" class="toolbar-link">Graphical User Interface</a>
+            <a href="#daemon" class="toolbar-link">Daemon only</a>
+            <a href="#hardware" class="toolbar-link">Hardware Wallets</a>
+          </nav>
+          <span class="toolbar-divider" aria-hidden="true"></span>
+          <span class="toolbar-label">Filter:</span>
           <input type="radio" id="filter-all" name="plugin-filter" class="plugin-filter-input" checked>
           <label for="filter-all" class="filter-btn">All</label>
           <input type="radio" id="filter-desktop" name="plugin-filter" class="plugin-filter-input">
@@ -76,6 +75,8 @@
           <label for="filter-android" class="filter-btn">Android</label>
           <input type="radio" id="filter-cli" name="plugin-filter" class="plugin-filter-input">
           <label for="filter-cli" class="filter-btn">CLI</label>
+          <input type="radio" id="filter-external" name="plugin-filter" class="plugin-filter-input">
+          <label for="filter-external" class="filter-btn">External</label>
         </div>
 
         <!-- ============================================================

@@ -27,6 +27,8 @@
   --color-badge-qml: #7d3c98;
   --color-badge-cli-bg: rgba(230, 126, 34, 0.15);
   --color-badge-cli: #c0612b;
+  --color-badge-external-bg: rgba(231, 76, 60, 0.15);
+  --color-badge-external: #c0392b;
   --color-warning: #e8a030;
   --color-warning-bg: #fef8ee;
   --color-warning-border: #f0d090;
@@ -405,20 +407,25 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   Section Navigation (plugins.html)
+   Plugin Toolbar — Navigation + Filters (plugins.html)
    -------------------------------------------------------------------------- */
-.section-nav {
+.plugin-toolbar {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
-  margin-bottom: var(--space-xl);
+  align-items: center;
   padding: var(--space-md);
   background-color: var(--color-bg-white);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
+  margin-bottom: var(--space-xl);
 }
 
-.section-nav a {
+.toolbar-nav {
+  display: contents;
+}
+
+.toolbar-link {
   padding: var(--space-sm) var(--space-md);
   background-color: var(--color-bg-code);
   border-radius: var(--border-radius-sm);
@@ -427,9 +434,19 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-primary);
 }
 
-.section-nav a:hover {
+.toolbar-link:hover {
   background-color: var(--color-accent);
   color: #ffffff;
+}
+
+.toolbar-divider {
+  display: none;
+}
+
+.toolbar-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-light);
 }
 
 /* --------------------------------------------------------------------------
@@ -546,8 +563,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .badge-external {
-  background-color: rgba(231, 76, 60, 0.15);
-  color: #c0392b;
+  background-color: var(--color-badge-external-bg);
+  color: var(--color-badge-external);
 }
 
 /* --------------------------------------------------------------------------
@@ -560,21 +577,6 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-}
-
-.plugin-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  align-items: center;
-  margin-bottom: var(--space-xl);
-}
-
-.filter-label {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--color-text-light);
-  margin-right: var(--space-xs);
 }
 
 .filter-btn {
@@ -619,6 +621,12 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--color-badge-cli);
 }
 
+#filter-external:checked ~ label[for="filter-external"] {
+  background-color: var(--color-badge-external-bg);
+  color: var(--color-badge-external);
+  border-color: var(--color-badge-external);
+}
+
 /* Hide non-matching plugin cards when a filter is active */
 body:has(#filter-desktop:checked) .plugin-card:not(:has(.badge-qt)) {
   display: none;
@@ -632,10 +640,15 @@ body:has(#filter-cli:checked) .plugin-card:not(:has(.badge-cli)) {
   display: none;
 }
 
+body:has(#filter-external:checked) .plugin-card:not(:has(.badge-external)) {
+  display: none;
+}
+
 /* Hide entire category sections when they contain no matching cards */
 body:has(#filter-desktop:checked) section[id]:not(:has(.badge-qt)),
 body:has(#filter-android:checked) section[id]:not(:has(.badge-qml)),
-body:has(#filter-cli:checked) section[id]:not(:has(.badge-cli)) {
+body:has(#filter-cli:checked) section[id]:not(:has(.badge-cli)),
+body:has(#filter-external:checked) section[id]:not(:has(.badge-external)) {
   display: none;
 }
 
@@ -913,6 +926,14 @@ pre code {
 
   .plugin-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .toolbar-divider {
+    display: block;
+    width: 1px;
+    align-self: stretch;
+    background-color: var(--color-border);
+    margin: 0 var(--space-xs);
   }
 
   .footer-content {
