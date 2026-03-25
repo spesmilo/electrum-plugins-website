@@ -31,6 +31,7 @@ cp -r "$REPO_DIR/index.html" \
       "$REPO_DIR/developers.html" \
       "$REPO_DIR/css" \
       "$REPO_DIR/assets" \
+      "$REPO_DIR/plugin" \
       "$SCRIPT_DIR/site/"
 
 # Build the image

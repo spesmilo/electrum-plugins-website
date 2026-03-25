@@ -31,7 +31,11 @@ Each plugin is an `<article class="plugin-card">` with icon, name, description, 
 
 ## Adding External Plugins
 
-New external plugins go in the appropriate category section of `plugins.html` above the corresponding comment marker (`<!-- ADD NEW EXTERNAL DESKTOP PLUGIN ABOVE THIS LINE -->` or `<!-- ADD NEW EXTERNAL CLI PLUGIN ABOVE THIS LINE -->`). Plugin icons go in `assets/plugins/` (48x48+ PNG/SVG). See `CONTRIBUTING.md` for the full card template.
+New external plugins go in the appropriate category section of `plugins.html` above the corresponding comment marker (`<!-- ADD NEW EXTERNAL DESKTOP PLUGIN ABOVE THIS LINE -->` or `<!-- ADD NEW EXTERNAL CLI PLUGIN ABOVE THIS LINE -->`). Plugin icons go in `assets/plugins/` (48x48+ PNG/SVG). See `CONTRIBUTING.md` for the full card template. Each plugin also needs a `plugin/{id}/index.html` share redirect page and an `assets/og/{id}.png` OG image (see CONTRIBUTING.md).
+
+## Social Sharing
+
+Each plugin has a shareable URL at `plugin/{id}/` containing a lightweight redirect page with plugin-specific OpenGraph metadata. These pages redirect instantly to `plugins.html#{id}` via `<meta http-equiv="refresh">`. OG images are in `assets/og/{id}.png` (1200x630). A generation script lives at `scripts/generate_og_images.py`. When adding a new external plugin, also create a `plugin/{id}/index.html` redirect page and generate an OG image (see CONTRIBUTING.md).
 
 ## Key Files
 
