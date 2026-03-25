@@ -28,7 +28,7 @@ Use this template:
 ```html
 <!-- Plugin Name -->
 <article class="plugin-card" id="PLUGIN_ID">
-  <a href="plugin/PLUGIN_ID/" class="plugin-share" title="Share this plugin" aria-label="Share PLUGIN_NAME plugin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+  <a href="plugin/PLUGIN_ID/" class="plugin-share" title="Share this plugin" aria-label="Share PLUGIN_NAME plugin"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-share-link"/></svg></a>
   <img src="assets/plugins/plugin-default.svg" alt="PLUGIN_NAME icon" class="plugin-icon" loading="lazy" width="48" height="48">
   <div class="plugin-info">
     <h3 class="plugin-name">PLUGIN_NAME</h3>

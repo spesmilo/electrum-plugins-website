@@ -3,13 +3,12 @@
 
 Usage: python3 scripts/generate_og_images.py
 
-Requires: Pillow, rsvg-convert (for SVG icons)
+Requires: Pillow, rsvg-convert (for SVG icons), fonts-dejavu-core
 Outputs: assets/og/{plugin-id}.png (1200x630 each)
 """
 
-import os
+import io
 import subprocess
-import tempfile
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
@@ -26,6 +25,7 @@ ACCENT_COLOR = (74, 158, 255)  # #4a9eff
 TEXT_COLOR = (220, 230, 240)
 SUBTEXT_COLOR = (140, 160, 180)
 ICON_BG = (240, 244, 248)      # #f0f4f8
+MARGIN = 40
 
 FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 FONT_REGULAR = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
@@ -61,17 +61,11 @@ PLUGINS = [
 
 def svg_to_png(svg_path, size):
     """Convert SVG to PNG at given size using rsvg-convert."""
-    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
-        tmp_path = tmp.name
-    try:
-        subprocess.run(
-            ["rsvg-convert", "-w", str(size), "-h", str(size),
-             str(svg_path), "-o", tmp_path],
-            check=True, capture_output=True,
-        )
-        return Image.open(tmp_path).convert("RGBA")
-    finally:
-        os.unlink(tmp_path)
+    result = subprocess.run(
+        ["rsvg-convert", "-w", str(size), "-h", str(size), str(svg_path)],
+        check=True, capture_output=True,
+    )
+    return Image.open(io.BytesIO(result.stdout)).convert("RGBA")
 
 
 def load_icon(filename, size=120):
@@ -79,51 +73,43 @@ def load_icon(filename, size=120):
     if filename is None:
         return None
     path = PLUGIN_ICONS_DIR / filename
-    if not path.exists():
-        print(f"  Warning: icon {path} not found, skipping icon")
+    try:
+        if path.suffix.lower() == ".svg":
+            img = svg_to_png(path, size)
+        else:
+            img = Image.open(path).convert("RGBA")
+            img = img.resize((size, size), Image.LANCZOS)
+        return img
+    except (FileNotFoundError, subprocess.CalledProcessError) as e:
+        print(f"  Warning: icon {path} failed ({e}), skipping icon")
         return None
-    if path.suffix.lower() == ".svg":
-        img = svg_to_png(path, size)
-    else:
-        img = Image.open(path).convert("RGBA")
-        img = img.resize((size, size), Image.LANCZOS)
-    return img
 
 
 def load_electrum_logo(size=48):
     """Load the Electrum logo SVG as PNG."""
-    if not ELECTRUM_LOGO.exists():
+    try:
+        return svg_to_png(ELECTRUM_LOGO, size)
+    except (FileNotFoundError, subprocess.CalledProcessError):
         return None
-    return svg_to_png(ELECTRUM_LOGO, size)
 
 
-def generate_og_image(plugin_id, name, icon_filename):
+def generate_og_image(plugin_id, name, icon_filename, fonts, logo):
     """Generate a single OG image."""
+    font_name, font_subtitle, font_footer = fonts
     img = Image.new("RGB", (WIDTH, HEIGHT), BG_COLOR)
     draw = ImageDraw.Draw(img)
 
-    # Subtle inner rectangle (the slightly lighter area from the existing OG image)
-    margin = 40
     draw.rectangle(
-        [margin, margin, WIDTH - margin, HEIGHT - margin],
+        [MARGIN, MARGIN, WIDTH - MARGIN, HEIGHT - MARGIN],
         fill=BG_INNER,
     )
 
-    # Load fonts
-    font_name = ImageFont.truetype(FONT_BOLD, 48)
-    font_subtitle = ImageFont.truetype(FONT_REGULAR, 24)
-    font_url = ImageFont.truetype(FONT_REGULAR, 18)
-
-    # Layout calculations
     icon_size = 120
-    icon_box_size = 140  # background box behind icon
+    icon_box_size = 140
     icon_box_radius = 12
-
-    # Load plugin icon
     icon = load_icon(icon_filename, icon_size)
 
     if icon:
-        # Draw icon background box (centered horizontally)
         icon_box_x = (WIDTH - icon_box_size) // 2
         icon_box_y = 120
         draw.rounded_rectangle(
@@ -132,7 +118,6 @@ def generate_og_image(plugin_id, name, icon_filename):
             radius=icon_box_radius,
             fill=ICON_BG,
         )
-        # Paste icon centered in box
         icon_x = icon_box_x + (icon_box_size - icon_size) // 2
         icon_y = icon_box_y + (icon_box_size - icon_size) // 2
         img.paste(icon, (icon_x, icon_y), icon)
@@ -140,13 +125,11 @@ def generate_og_image(plugin_id, name, icon_filename):
     else:
         text_y_start = 180
 
-    # Plugin name (centered)
     name_bbox = draw.textbbox((0, 0), name, font=font_name)
     name_w = name_bbox[2] - name_bbox[0]
     name_x = (WIDTH - name_w) // 2
     draw.text((name_x, text_y_start), name, fill=TEXT_COLOR, font=font_name)
 
-    # "Electrum Plugin" subtitle
     subtitle = "Electrum Plugin"
     sub_bbox = draw.textbbox((0, 0), subtitle, font=font_subtitle)
     sub_w = sub_bbox[2] - sub_bbox[0]
@@ -154,32 +137,29 @@ def generate_og_image(plugin_id, name, icon_filename):
     sub_y = text_y_start + (name_bbox[3] - name_bbox[1]) + 16
     draw.text((sub_x, sub_y), subtitle, fill=SUBTEXT_COLOR, font=font_subtitle)
 
-    # Bottom: Electrum logo + URL
-    logo = load_electrum_logo(32)
     url_text = "plugins.electrum.org"
-    url_bbox = draw.textbbox((0, 0), url_text, font=font_url)
+    url_bbox = draw.textbbox((0, 0), url_text, font=font_footer)
     url_w = url_bbox[2] - url_bbox[0]
 
     if logo:
-        total_w = 32 + 8 + url_w  # logo + gap + text
+        logo_w = logo.width
+        total_w = logo_w + 8 + url_w
         start_x = (WIDTH - total_w) // 2
-        logo_y = HEIGHT - margin - 32 - 16
+        logo_y = HEIGHT - MARGIN - logo_w - 16
         img.paste(logo, (start_x, logo_y), logo)
         draw.text(
-            (start_x + 32 + 8, logo_y + 6),
-            url_text, fill=SUBTEXT_COLOR, font=font_url,
+            (start_x + logo_w + 8, logo_y + 6),
+            url_text, fill=SUBTEXT_COLOR, font=font_footer,
         )
     else:
         url_x = (WIDTH - url_w) // 2
         draw.text(
-            (url_x, HEIGHT - margin - 30),
-            url_text, fill=SUBTEXT_COLOR, font=font_url,
+            (url_x, HEIGHT - MARGIN - 30),
+            url_text, fill=SUBTEXT_COLOR, font=font_footer,
         )
 
-    # Accent line at top
-    draw.rectangle([margin, margin, WIDTH - margin, margin + 3], fill=ACCENT_COLOR)
+    draw.rectangle([MARGIN, MARGIN, WIDTH - MARGIN, MARGIN + 3], fill=ACCENT_COLOR)
 
-    # Save
     out_path = OG_DIR / f"{plugin_id}.png"
     img.save(out_path, "PNG", optimize=True)
     print(f"  Generated: {out_path.relative_to(REPO_ROOT)}")
@@ -187,9 +167,18 @@ def generate_og_image(plugin_id, name, icon_filename):
 
 def main():
     OG_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Load fonts and logo once, reuse across all images
+    fonts = (
+        ImageFont.truetype(FONT_BOLD, 48),
+        ImageFont.truetype(FONT_REGULAR, 24),
+        ImageFont.truetype(FONT_REGULAR, 18),
+    )
+    logo = load_electrum_logo(32)
+
     print(f"Generating {len(PLUGINS)} OG images...")
     for plugin_id, name, icon_filename in PLUGINS:
-        generate_og_image(plugin_id, name, icon_filename)
+        generate_og_image(plugin_id, name, icon_filename, fonts, logo)
     print("Done.")
 
 
