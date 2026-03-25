@@ -466,11 +466,48 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   gap: var(--space-md);
   transition: box-shadow var(--transition), transform var(--transition);
+  position: relative;
+  scroll-margin-top: 80px;
 }
 
 .plugin-card:hover {
   box-shadow: var(--shadow-lg);
   transform: translateY(-2px);
+}
+
+.plugin-share {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  transition: opacity var(--transition), color var(--transition), background-color var(--transition);
+}
+
+.plugin-share:hover {
+  opacity: 1;
+  color: var(--color-accent);
+  background-color: var(--color-bg-code);
+}
+
+.plugin-card:hover .plugin-share {
+  opacity: 0.7;
+}
+
+.plugin-share svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .plugin-icon {
