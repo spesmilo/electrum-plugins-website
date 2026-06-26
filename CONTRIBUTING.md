@@ -104,7 +104,17 @@ Each plugin needs a share page for social media previews:
 
 3. Generate an OG image: `python3 scripts/generate_og_images.py` (requires Pillow). Or manually add a 1200x630 PNG to `assets/og/PLUGIN_ID.png`.
 
-### 7. Open a pull request
+### 7. Regenerate the discoverability files
+
+The site ships machine-readable files for search engines, LLMs, and coding agents (`sitemap.xml`, `llms.txt`, `llms-full.txt`, `robots.txt`). Regenerate them so your plugin is included:
+
+```bash
+python3 scripts/generate_llm_files.py
+```
+
+This needs only Python 3 (no extra packages). Commit the updated files together with your plugin card.
+
+### 8. Open a pull request
 
 - Title: `Add PLUGIN_NAME to external plugins`
 - Description: Brief explanation of your plugin and a link to the repository

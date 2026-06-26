@@ -29,6 +29,10 @@ mkdir -p "$SCRIPT_DIR/site"
 cp -r "$REPO_DIR/index.html" \
       "$REPO_DIR/plugins.html" \
       "$REPO_DIR/developers.html" \
+      "$REPO_DIR/robots.txt" \
+      "$REPO_DIR/sitemap.xml" \
+      "$REPO_DIR/llms.txt" \
+      "$REPO_DIR/llms-full.txt" \
       "$REPO_DIR/css" \
       "$REPO_DIR/assets" \
       "$REPO_DIR/plugin" \
