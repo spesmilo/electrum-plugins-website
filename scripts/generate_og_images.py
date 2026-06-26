@@ -43,6 +43,7 @@ PLUGINS = [
     ("guardian", "Guardian", "guardian.svg"),
     ("joinstr", "Joinstr", "joinstr.svg"),
     ("ln-graph-visualizer", "LN Graph Visualizer", "ln-graph-visualizer.png"),
+    ("clink", "CLINK Plugin", "clink.svg"),
     ("swapserver", "SwapServer", None),  # emoji icon, no file
     ("watchtower", "Watchtower", "watchtower.svg"),
     ("lnurl-server", "LNURL Server", "lnurl-server.svg"),
