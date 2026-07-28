@@ -133,6 +133,15 @@ Send BIP352 Silent Payments from standard single-signature software wallets thro
 - Page: https://plugins.electrum.org/plugins.html#silent-payments-sender
 - View Repository: https://github.com/ZenulAbidin/electrum-silent-payments-sender
 
+#### Electrum Personal Server
+
+Connect Electrum to your own Bitcoin Core full node. Provides full node security and privacy without revealing your addresses to any third party.
+
+- Platforms: Desktop
+- Distribution: External (third-party)
+- Page: https://plugins.electrum.org/plugins.html#electrum-personal-server
+- View Repository: https://github.com/svanstaa/electrum-eps-plugin
+
 ### Daemon only
 
 #### SwapServer

@@ -45,6 +45,7 @@ PLUGINS = [
     ("ln-graph-visualizer", "LN Graph Visualizer", "ln-graph-visualizer.png"),
     ("clink", "CLINK Plugin", "clink.svg"),
     ("silent-payments-sender", "Silent Payments Sender", "silent-payments-sender.svg"),
+    ("electrum-personal-server", "Electrum Personal Server", "electrum-personal-server.svg"),
     ("swapserver", "SwapServer", None),  # emoji icon, no file
     ("watchtower", "Watchtower", "watchtower.svg"),
     ("lnurl-server", "LNURL Server", "lnurl-server.svg"),
