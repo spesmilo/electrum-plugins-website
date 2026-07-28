@@ -65,7 +65,7 @@ For example, a CLI-only plugin would use `<span class="badge badge-cli">CLI</spa
 
 If you want a custom icon instead of the default placeholder:
 
-1. Add a PNG image (48x48 or larger, square) to `assets/plugins/`
+1. Add a PNG or SVG image (48x48 or larger, square) to `assets/plugins/`
 2. Update the `<img src="...">` path in your plugin card
 
 ### 6. Add a share page and OG image
@@ -85,7 +85,7 @@ Each plugin needs a share page for social media previews:
   <meta property="og:title" content="PLUGIN_NAME — Electrum Plugin">
   <meta property="og:description" content="BRIEF_DESCRIPTION">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://plugins.electrum.org/plugin/PLUGIN_ID">
+  <meta property="og:url" content="https://plugins.electrum.org/plugin/PLUGIN_ID/">
   <meta property="og:image" content="https://plugins.electrum.org/assets/og/PLUGIN_ID.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
