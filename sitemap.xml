@@ -15,6 +15,7 @@
   <url><loc>https://plugins.electrum.org/plugin/joinstr/</loc><priority>0.5</priority></url>
   <url><loc>https://plugins.electrum.org/plugin/ln-graph-visualizer/</loc><priority>0.5</priority></url>
   <url><loc>https://plugins.electrum.org/plugin/clink/</loc><priority>0.5</priority></url>
+  <url><loc>https://plugins.electrum.org/plugin/silent-payments-sender/</loc><priority>0.5</priority></url>
   <url><loc>https://plugins.electrum.org/plugin/swapserver/</loc><priority>0.5</priority></url>
   <url><loc>https://plugins.electrum.org/plugin/watchtower/</loc><priority>0.5</priority></url>
   <url><loc>https://plugins.electrum.org/plugin/lnurl-server/</loc><priority>0.5</priority></url>

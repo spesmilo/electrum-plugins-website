@@ -124,6 +124,15 @@ Generate CLINK noffers. Leverages NOSTR to automatically generate lightning invo
 - Page: https://plugins.electrum.org/plugins.html#clink
 - View Repository: https://github.com/BareBits/electrum_clink/
 
+#### Silent Payments Sender
+
+Send BIP352 Silent Payments from standard single-signature software wallets through Electrum's Send tab.
+
+- Platforms: Desktop
+- Distribution: External (third-party)
+- Page: https://plugins.electrum.org/plugins.html#silent-payments-sender
+- View Repository: https://github.com/ZenulAbidin/electrum-silent-payments-sender
+
 ### Daemon only
 
 #### SwapServer
