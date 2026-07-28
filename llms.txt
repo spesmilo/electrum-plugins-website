@@ -22,6 +22,7 @@ This site lists plugins for the Electrum Bitcoin wallet (enabled via Tools → P
 - [Joinstr](https://plugins.electrum.org/plugins.html#joinstr): Collaborative transactions coordinated via Nostr relays for enhanced transaction privacy. (Desktop; external; source: https://joinstr.xyz/)
 - [LN Graph Visualizer](https://plugins.electrum.org/plugins.html#ln-graph-visualizer): Visualize the Lightning Network graph of nodes and channels directly within Electrum. (Desktop; external; source: https://github.com/f321x/electrum-lightning-graph-visualizer)
 - [CLINK Plugin](https://plugins.electrum.org/plugins.html#clink): Generate CLINK noffers. Leverages NOSTR to automatically generate lightning invoices without opening ports or manual intervention. Similar to LNURL. (Desktop; external; source: https://github.com/BareBits/electrum_clink/)
+- [Silent Payments Sender](https://plugins.electrum.org/plugins.html#silent-payments-sender): Send BIP352 Silent Payments from standard single-signature software wallets through Electrum's Send tab. (Desktop; external; source: https://github.com/ZenulAbidin/electrum-silent-payments-sender)
 
 ## Daemon only plugins
 - [SwapServer](https://plugins.electrum.org/plugins.html#swapserver): Offer submarine swaps to other Electrum users, enabling trustless exchanges between on-chain and Lightning in both directions. (CLI; internal; source: https://electrum.readthedocs.io/en/latest/swapserver.html)
