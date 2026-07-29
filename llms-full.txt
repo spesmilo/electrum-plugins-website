@@ -142,6 +142,15 @@ Connect Electrum to your own Bitcoin Core full node. Provides full node security
 - Page: https://plugins.electrum.org/plugins.html#electrum-personal-server
 - View Repository: https://github.com/svanstaa/electrum-eps-plugin
 
+#### SwapServer GUI
+
+Manage Electrum's built-in submarine swap server from a graphical tab. Configure fees, ports and nostr relays, toggle the server at runtime, and monitor liquidity, swap history and earnings.
+
+- Platforms: Desktop
+- Distribution: External (third-party)
+- Page: https://plugins.electrum.org/plugins.html#swapserver-gui
+- View Repository: https://github.com/nothing-stops-this-train/electrum_swapgui
+
 ### Daemon only
 
 #### SwapServer
