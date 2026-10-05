@@ -151,6 +151,15 @@ Manage Electrum's built-in submarine swap server from a graphical tab. Configure
 - Page: https://plugins.electrum.org/plugins.html#swapserver-gui
 - View Repository: https://github.com/nothing-stops-this-train/electrum_swapgui
 
+#### Octojoin
+
+Alternative for payjoin (uses swapped coins)
+
+- Platforms: Desktop, CLI
+- Distribution: External (third-party)
+- Page: https://plugins.electrum.org/plugins.html#octojoin
+- View Repository: https://gitlab.com/1440000bytes/octojoin
+
 ### Daemon only
 
 #### SwapServer
