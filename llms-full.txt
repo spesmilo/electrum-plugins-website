@@ -151,6 +151,15 @@ Manage Electrum's built-in submarine swap server from a graphical tab. Configure
 - Page: https://plugins.electrum.org/plugins.html#swapserver-gui
 - View Repository: https://github.com/nothing-stops-this-train/electrum_swapgui
 
+#### joinmarket-ng
+
+Send payments as collaborative transactions with makers from the joinmarket-ng network, connecting over Tor. No separate JoinMarket daemon needed.
+
+- Platforms: Desktop, CLI
+- Distribution: External (third-party)
+- Page: https://plugins.electrum.org/plugins.html#joinmarket-ng
+- View Repository: https://gitlab.com/1440000bytes/electrum-joinmarket-plugin
+
 ### Daemon only
 
 #### SwapServer

@@ -47,6 +47,7 @@ PLUGINS = [
     ("silent-payments-sender", "Silent Payments Sender", "silent-payments-sender.svg"),
     ("electrum-personal-server", "Electrum Personal Server", "electrum-personal-server.svg"),
     ("swapserver-gui", "SwapServer GUI", "swapserver-gui.svg"),
+    ("joinmarket-ng", "joinmarket-ng", "joinmarket-ng.png"),
     ("swapserver", "SwapServer", None),  # emoji icon, no file
     ("watchtower", "Watchtower", "watchtower.svg"),
     ("lnurl-server", "LNURL Server", "lnurl-server.svg"),
