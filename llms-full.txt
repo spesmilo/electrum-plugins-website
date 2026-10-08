@@ -479,6 +479,16 @@ class Plugin(BasePlugin):
         ...
 ```
 
+#### Network requests in Qt plugins
+
+A plugin button can fetch public data without blocking the wallet UI. Use an asynchronous client such as [QNetworkAccessManager](https://doc.qt.io/qt-6/qnetworkaccessmanager.html) in its owning thread, and update widgets on the GUI thread. Do not perform blocking HTTP calls or start a nested event loop in a button or hook callback.
+
+- **Ask before sharing.** Explain which service receives a transaction ID or other wallet-related data. A public transaction ID can still link a user to a transaction. Keep inspection separate from signing, broadcasting, or purchasing a service.
+- **Bound the request.** Set a timeout and a response-size limit while reading, not just after buffering the whole body. Choose a redirect policy explicitly; do not forward wallet data to an unexpected destination.
+- **Handle failures inside signal callbacks.** Check network errors and HTTP status before parsing. Treat empty or failed reads, malformed JSON, and invalid field types as recoverable errors. Catch parser and I/O exceptions at the callback boundary so they cannot escape into Qt's event loop, and restore the button state on every exit path.
+- **Own the reply lifecycle.** Keep the [QNetworkReply](https://doc.qt.io/qt-6/qnetworkreply.html) alive while processing it and use `deleteLater()` when finished. On panel close, invalidate callbacks before calling `abort()`: aborting can emit `finished`. Ignore late replies from older requests rather than overwriting a newer result.
+- **Test the real Qt path.** Exercise a localhost fixture with success, empty HTTP errors, TLS failures, oversized or malformed responses, timeout, and closing the panel mid-request. Check that timers and the UI remain responsive. Mocked reply objects alone may not reproduce actual QIODevice read behavior.
+
 #### Key BasePlugin methods
 
 - `is_enabled()` — check if the plugin is enabled and authorized

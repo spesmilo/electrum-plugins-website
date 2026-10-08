@@ -286,6 +286,16 @@ class Plugin(BasePlugin):
         """Toggle the virtual keyboard visibility."""
         ...</code></pre>
 
+              <h3 id="qt-network">Network requests in Qt plugins</h3>
+              <p>A plugin button can fetch public data without blocking the wallet UI. Use an asynchronous client such as <a href="https://doc.qt.io/qt-6/qnetworkaccessmanager.html">QNetworkAccessManager</a> in its owning thread, and update widgets on the GUI thread. Do not perform blocking HTTP calls or start a nested event loop in a button or hook callback.</p>
+              <ul>
+                <li><strong>Ask before sharing.</strong> Explain which service receives a transaction ID or other wallet-related data. A public transaction ID can still link a user to a transaction. Keep inspection separate from signing, broadcasting, or purchasing a service.</li>
+                <li><strong>Bound the request.</strong> Set a timeout and a response-size limit while reading, not just after buffering the whole body. Choose a redirect policy explicitly; do not forward wallet data to an unexpected destination.</li>
+                <li><strong>Handle failures inside signal callbacks.</strong> Check network errors and HTTP status before parsing. Treat empty or failed reads, malformed JSON, and invalid field types as recoverable errors. Catch parser and I/O exceptions at the callback boundary so they cannot escape into Qt's event loop, and restore the button state on every exit path.</li>
+                <li><strong>Own the reply lifecycle.</strong> Keep the <a href="https://doc.qt.io/qt-6/qnetworkreply.html">QNetworkReply</a> alive while processing it and use <code>deleteLater()</code> when finished. On panel close, invalidate callbacks before calling <code>abort()</code>: aborting can emit <code>finished</code>. Ignore late replies from older requests rather than overwriting a newer result.</li>
+                <li><strong>Test the real Qt path.</strong> Exercise a localhost fixture with success, empty HTTP errors, TLS failures, oversized or malformed responses, timeout, and closing the panel mid-request. Check that timers and the UI remain responsive. Mocked reply objects alone may not reproduce actual QIODevice read behavior.</li>
+              </ul>
+
               <h3>Key BasePlugin methods</h3>
               <ul>
                 <li><code>is_enabled()</code> &mdash; check if the plugin is enabled and authorized</li>
